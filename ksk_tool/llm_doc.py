@@ -136,6 +136,7 @@ def read_table_with_llm(path, base_url: str, api_key: str, model: str) -> list[P
                 dia_chi=address,
                 khong_chac_chan=1 if reasons else 0,
                 ly_do=", ".join(reasons),
+                xac_nhan=1 if len(number) == 12 else 0,
                 row_id=row_id,
                 anh_dong=f"{row_id}.jpg",
                 do_tin_cay=confidence,

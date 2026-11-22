@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import csv
 import json
+import re
 import threading
 from pathlib import Path
 
@@ -128,7 +129,15 @@ def _load_dates() -> None:
         pass
     if STATE_PATH.exists():
         _state["rows"] = json.loads(STATE_PATH.read_text(encoding="utf-8"))
-        if any(correct_row_gender(row) for row in _state["rows"]):
+        changed = False
+        for row in _state["rows"]:
+            changed = correct_row_gender(row) or changed
+            number = re.sub(r"\D", "", str(row.get("cccd") or ""))
+            if len(number) == 12 and not row.get("xac_nhan"):
+                row["cccd"] = number
+                row["xac_nhan"] = 1
+                changed = True
+        if changed:
             _save()
 
 
@@ -149,13 +158,8 @@ def _apply_edits(payload: list[dict]) -> None:
 
 
 def _valid(row: dict) -> str:
-    if not row.get("ho_ten") or len(str(row["ho_ten"]).split()) < 2:
-        return "Họ tên chưa đủ"
-    if parse_date(row.get("ngay_sinh", "")) is None:
-        return "Ngày sinh không hợp lệ"
-    if canonical_gender(row.get("gioi_tinh", "")) not in {"Nam", "Nữ"}:
-        return "Giới tính phải là Nam hoặc Nữ"
-    if len(str(row.get("cccd", ""))) != 12 or not str(row["cccd"]).isdigit():
+    number = re.sub(r"\D", "", str(row.get("cccd") or ""))
+    if len(number) != 12:
         return "CCCD phải đủ 12 số"
     return ""
 

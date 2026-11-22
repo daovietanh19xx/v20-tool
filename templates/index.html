@@ -120,7 +120,7 @@
         if (row.ket_luan === "DUNG_HET") card.className = "ok";
         else if (row.ket_luan === "KHONG_CO_TREN_HE_THONG") card.className = "missing";
         else if (row.ket_luan === "SAI_THONG_TIN" || row.ket_luan === "LOI_KIEM_TRA") card.className = "bad";
-        else if (row.khong_chac_chan && !row.xac_nhan) card.className = "uncertain";
+        else if (row.khong_chac_chan) card.className = "uncertain";
         const note = row.ly_do || "";
         const checked = row.ket_luan ? `
           <div class="result">

@@ -78,12 +78,7 @@ function peopleFromCsv(records) {
     dia_chi: record.Dia_chi || record.dia_chi || "",
     khong_chac_chan: record.Khong_chac_chan || record.khong_chac_chan || "",
     xac_nhan: record.Da_xac_nhan || record.xac_nhan || "",
-  })).filter((person) => {
-    if (person.cccd.length !== 12) return false;
-    if (person.xac_nhan !== "" && person.xac_nhan !== "1") return false;
-    if (person.xac_nhan === "" && person.khong_chac_chan === "1") return false;
-    return true;
-  });
+  })).filter((person) => person.cccd.length === 12);
 }
 
 async function peopleFromLocal() {
