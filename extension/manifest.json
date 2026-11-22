@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "Kiểm tra khám sức khỏe",
+  "version": "1.0.0",
+  "description": "Tra cứu danh sách khám sức khỏe trên v20, chỉ đọc, rồi tải CSV.",
+  "permissions": ["storage"],
+  "host_permissions": [
+    "https://v20.ytecoso.vn/*",
+    "http://127.0.0.1:8765/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Kiểm tra khám sức khỏe"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://v20.ytecoso.vn/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { width: 340px; margin: 0; font: 14px "Segoe UI", sans-serif; color: #1c2430; }
+    main { padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+    h1 { font-size: 16px; margin: 0; }
+    p { margin: 0; color: #4d5d6d; font-size: 12px; }
+    label { display: flex; flex-direction: column; gap: 4px; font-size: 12px; }
+    input, select, button { font: inherit; }
+    input, select { border: 1px solid #c5d0db; border-radius: 6px; padding: 7px; }
+    button { border: 0; border-radius: 6px; padding: 8px 10px; background: #16324f; color: white; cursor: pointer; }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Kiểm tra trên v20</h1>
+    <p>Mở trang v20.ytecoso.vn khi đã đăng nhập, rồi bấm Kiểm tra. Extension chỉ bấm Tìm kiếm.</p>
+    <div id="local">
+      <label>Ảnh đã đọc
+        <select id="anh"></select>
+      </label>
+      <p>Lấy các dòng đã xác nhận của ảnh này từ máy cục bộ.</p>
+    </div>
+    <div id="csvBox" class="hidden">
+      <label>File CSV kết quả đọc
+        <input id="csv" type="file" accept=".csv,text/csv">
+      </label>
+      <p>Không kết nối được 127.0.0.1:8765. Dùng file CSV: chỉ lấy dòng CCCD đủ 12 số và không đánh dấu chưa chắc.</p>
+    </div>
+    <button id="go" type="button">Kiểm tra</button>
+    <p id="message"></p>
+    <p>Cài extension: Chrome → Tiện ích → Bật chế độ nhà phát triển → Tải tiện ích đã giải nén → chọn thư mục extension.</p>
+  </main>
+  <script src="popup.js"></script>
+</body>
+</html>

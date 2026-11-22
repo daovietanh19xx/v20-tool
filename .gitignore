@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.py[cod]
+
+config.local.json
+
+anh_can_check/*
+!anh_can_check/.gitkeep
+
+output/
+
+v20.html
+v20-ketqua.html
